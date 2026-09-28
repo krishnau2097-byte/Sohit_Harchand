@@ -7,9 +7,8 @@ import { Signature } from './ui/Signature'
 
 /**
  * Storytelling footer reveal:
- * As the user scrolls into the bottom of the page, the signature and giant name
- * become visible from bottom to upward, illuminate in full view, and smoothly
- * dissolve/disappear as scrolling continues off.
+ * As the footer enters view, the signature and name reveal once, then remain
+ * legible through the closing credits instead of fading into empty space.
  */
 export function FooterStoryName() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -26,8 +25,8 @@ export function FooterStoryName() {
       content.style.opacity = '1'
       content.style.transform = 'none'
       content.style.filter = 'none'
-      setSignatureAnimated(true)
-      return
+      const revealFrame = requestAnimationFrame(() => setSignatureAnimated(true))
+      return () => cancelAnimationFrame(revealFrame)
     }
 
     let rafId: number
@@ -43,61 +42,30 @@ export function FooterStoryName() {
         return
       }
 
-      // If entirely above screen
-      if (rect.bottom <= 0) {
-        content.style.opacity = '0'
-        content.style.transform = 'translate3d(0, -60px, 0) scale(0.95)'
-        content.style.filter = 'blur(6px)'
-        return
-      }
-
-      // Entry phase: rect.top enters from winH to (winH * 0.5)
+      // Entry phase: reveal the signature as the footer comes into view.
       const enterDist = winH * 0.55
       const enterProgress = Math.min(1, Math.max(0, (winH - rect.top) / enterDist))
 
-      // Exit phase: rect.bottom leaves towards top from (winH * 0.25) to 0
-      const exitDist = winH * 0.25
-      const exitProgress = rect.bottom < exitDist ? Math.min(1, Math.max(0, (exitDist - rect.bottom) / exitDist)) : 0
-
-      let opacity = 1
-      let translateY = 0
-      let scale = 1
-      let blur = 0
-
       if (enterProgress < 1) {
-        // Smooth cubic ease out
         const ease = 1 - Math.pow(1 - enterProgress, 3)
-        opacity = ease
-        translateY = 80 * (1 - ease)
-        scale = 0.92 + 0.08 * ease
-        blur = 8 * (1 - ease)
+        content.style.opacity = `${ease}`
+        content.style.transform = `translate3d(0, ${80 * (1 - ease)}px, 0) scale(${0.92 + 0.08 * ease})`
+        content.style.filter = `blur(${8 * (1 - ease)}px)`
 
         if (enterProgress > 0.3 && !triggeredRef.current) {
           triggeredRef.current = true
           setSignatureAnimated(true)
         }
-      } else if (exitProgress > 0) {
-        // Smooth quadratic ease in for exit
-        const ease = Math.pow(exitProgress, 2)
-        opacity = Math.max(0, 1 - ease * 1.2)
-        translateY = -60 * ease
-        scale = 1 - 0.05 * ease
-        blur = 6 * ease
-      } else {
-        // Fully visible in view
-        opacity = 1
-        translateY = 0
-        scale = 1
-        blur = 0
-        if (!triggeredRef.current) {
-          triggeredRef.current = true
-          setSignatureAnimated(true)
-        }
+        return
       }
 
-      content.style.opacity = `${opacity}`
-      content.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`
-      content.style.filter = blur > 0.1 ? `blur(${blur}px)` : 'none'
+      content.style.opacity = '1'
+      content.style.transform = 'none'
+      content.style.filter = 'none'
+      if (!triggeredRef.current) {
+        triggeredRef.current = true
+        setSignatureAnimated(true)
+      }
     }
 
     const handler = () => {
@@ -132,7 +100,7 @@ export function FooterStoryName() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-[340px] sm:min-h-[420px] md:min-h-[480px] flex flex-col items-center justify-center py-14 select-none"
+      className="relative flex min-h-[280px] flex-col items-center justify-center py-12 select-none sm:min-h-[320px] md:min-h-[360px]"
       aria-label="Creator Signature and Identity"
     >
       {/* Ambient background glow spotlight */}
@@ -140,7 +108,7 @@ export function FooterStoryName() {
         className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-30"
         aria-hidden="true"
       >
-        <div className="h-[280px] w-[80vw] max-w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(217,164,65,0.22),transparent_70%)] blur-3xl" />
+        <div className="h-[280px] w-[80vw] max-w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,var(--glow),transparent_70%)] blur-3xl" />
       </div>
 
       <div
@@ -170,7 +138,7 @@ export function FooterStoryName() {
         </div>
 
         {/* Giant Monolithic Name in Storytelling Reveal */}
-        <p className="font-wide text-center text-[clamp(1.8rem,7.2vw,8.2rem)] leading-[0.9] whitespace-nowrap bg-gradient-to-b from-gold-3 via-gold to-gold-2 bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(217,164,65,0.25)]">
+        <p className="font-wide text-center text-[clamp(1.8rem,7.2vw,8.2rem)] leading-[0.9] whitespace-nowrap bg-gradient-to-b from-gold-3 via-gold to-gold-2 bg-clip-text text-transparent drop-shadow-[0_10px_35px_var(--glow)]">
           {profile.name.toUpperCase()}
         </p>
 

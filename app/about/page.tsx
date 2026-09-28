@@ -52,7 +52,7 @@ export default function AboutPage() {
           </div>
           <FadeIn className="relative lg:col-span-4 lg:col-start-9" y={40}>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line-strong bg-gradient-to-b from-surface-2 via-surface to-bg shadow-2xl flex items-end justify-center pt-8">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(217,164,65,0.14),transparent_65%)] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--glow),transparent_65%)] pointer-events-none" />
               <Portrait className="h-full w-auto flex items-end justify-center" />
               <p className="font-wide absolute top-6 left-6 text-6xl text-gold/20 select-none pointer-events-none">{profile.initials}</p>
               <p className="absolute right-5 bottom-5 chip border-line-strong bg-bg/80 backdrop-blur">{profile.location}</p>
@@ -98,14 +98,14 @@ export default function AboutPage() {
           <div className="card relative overflow-hidden p-8 md:p-14 lg:p-16">
             <div className="grid items-center gap-10 lg:grid-cols-12">
               <div className="relative aspect-[3/4] max-h-[520px] overflow-hidden rounded-[1.5rem] border border-line-strong shadow-xl lg:col-span-5 bg-gradient-to-b from-surface-2 via-surface to-bg flex items-end justify-center p-4">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,164,65,0.12),transparent_70%)] pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--glow),transparent_70%)] pointer-events-none" />
                 <Image
                   src={profile.aboutPortrait ?? '/images/portrait-full-cutout.webp'}
                   alt={`Full portrait of ${profile.name}`}
                   width={774}
                   height={1348}
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="h-full w-auto max-h-full max-w-full object-contain object-bottom select-none filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_16px_rgba(217,164,65,0.18)] transition-transform duration-700 hover:scale-105"
+                  className="h-full w-auto max-h-full max-w-full object-contain object-bottom select-none filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_16px_var(--glow)] transition-transform duration-700 hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
                 <p className="absolute bottom-4 left-4 right-4 font-mono text-[11px] tracking-wider text-white/90 uppercase backdrop-blur-md bg-black/60 px-3.5 py-2 rounded-full border border-white/20 text-center">

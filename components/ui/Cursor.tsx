@@ -7,10 +7,10 @@ import { isFinePointer, isReducedMotion } from '@/lib/motion'
 type Mode = 'idle' | 'link' | 'text' | 'input'
 
 /** Cursor geometry (px) */
-const DOT_SIZE = 10
-const RING_SIZE = 40
-const SCALE: Record<Mode, number> = { idle: 1, link: 0.7, text: 0.5, input: 0.2 }
-const RING_SCALE: Record<Mode, number> = { idle: 1, link: 1.5, text: 1.7, input: 0.3 }
+const DOT_SIZE = 6
+const RING_SIZE = 30
+const SCALE: Record<Mode, number> = { idle: 1, link: 0.9, text: 0.65, input: 0.4 }
+const RING_SCALE: Record<Mode, number> = { idle: 1, link: 1.2, text: 1.35, input: 0.5 }
 
 /**
  * Custom cursor:
@@ -76,8 +76,8 @@ export function Cursor() {
       animate(ring, { scale: RING_SCALE[mode || 'idle'] * 0.85, duration: 180, ease: 'out(3)' })
     }
     const onUp = () => {
-      animate(blob.firstElementChild!, { scale: SCALE[mode || 'idle'], duration: 450, ease: 'outElastic(1, .5)' })
-      animate(ring, { scale: RING_SCALE[mode || 'idle'], duration: 500, ease: 'outElastic(1, .5)' })
+      animate(blob.firstElementChild!, { scale: SCALE[mode || 'idle'], duration: 280, ease: 'out(3)' })
+      animate(ring, { scale: RING_SCALE[mode || 'idle'], duration: 320, ease: 'out(3)' })
     }
 
     const onLeaveWindow = () => {

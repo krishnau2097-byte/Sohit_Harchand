@@ -5,10 +5,11 @@ import { animate, stagger } from 'animejs'
 import { skillCategories, skills, softSkills, type SkillCategory, type Skill } from '@/content/skills'
 import { achievements, education, experience, type ExperienceType } from '@/content/experience'
 
+import { profile, stats } from '@/content/profile'
 import { isReducedMotion } from '@/lib/motion'
-import { Check, ArrowUpRight } from '../ui/Icons'
+import { Check } from '../ui/Icons'
 
-type Tab = { id: string; label: string; icon?: string }
+type Tab = { id: string; label: string }
 
 /** Accessible tablist (arrow keys, Home/End) with a sliding gold capsule/underline. */
 function Tabs({
@@ -63,7 +64,7 @@ function Tabs({
           : 'rounded-full border border-line-strong/60 bg-surface/30 p-1.5 backdrop-blur-sm'
       }`}
     >
-      {tabs.map((t) => (
+      {tabs.map((t, index) => (
         <button
           key={t.id}
           role="tab"
@@ -80,7 +81,7 @@ function Tabs({
               : 'rounded-full px-4 py-2 text-xs md:text-sm text-ink-3 hover:text-ink aria-selected:text-gold font-medium'
           }`}
         >
-          {t.icon ? <span className="text-base select-none">{t.icon}</span> : null}
+          <span className="font-mono text-[10px] text-ink-3">{String(index + 1).padStart(2, '0')}</span>
           <span>{t.label}</span>
         </button>
       ))}
@@ -88,8 +89,8 @@ function Tabs({
         ref={lineRef}
         className={`pointer-events-none absolute left-0 z-0 transition-opacity duration-300 ${
           size === 'lg'
-            ? 'top-2 bottom-2 rounded-xl bg-gold/15 border border-gold/40 shadow-[0_0_20px_rgba(217,164,65,0.2)]'
-            : 'top-1.5 bottom-1.5 rounded-full bg-gold/15 border border-gold/30 shadow-[0_0_12px_rgba(217,164,65,0.15)]'
+            ? 'top-2 bottom-2 rounded-xl bg-gold/15 border border-gold/40 shadow-[0_0_20px_var(--glow)]'
+            : 'top-1.5 bottom-1.5 rounded-full bg-gold/15 border border-gold/30 shadow-[0_0_12px_var(--glow)]'
         }`}
         aria-hidden="true"
       />
@@ -115,9 +116,9 @@ function usePanelIn(key: string) {
 }
 
 const mainTabs: Tab[] = [
-  { id: 'skills', label: 'Skills & Capabilities', icon: '⚡' },
-  { id: 'experience', label: 'Career Experience', icon: '💼' },
-  { id: 'education', label: 'Education & Milestones', icon: '🎓' },
+  { id: 'skills', label: 'Skills & Capabilities' },
+  { id: 'experience', label: 'Career Experience' },
+  { id: 'education', label: 'Education & Milestones' },
 ]
 
 export function AboutTabs() {
@@ -128,7 +129,8 @@ export function AboutTabs() {
     if (typeof window === 'undefined') return
     const hash = window.location.hash.replace('#', '')
     if (hash === 'skills' || hash === 'experience' || hash === 'education') {
-      setTab(hash)
+      const frame = requestAnimationFrame(() => setTab(hash))
+      return () => cancelAnimationFrame(frame)
     }
   }, [])
 
@@ -153,14 +155,14 @@ export function AboutTabs() {
   )
 }
 
-const categoryIcons: Record<string, string> = {
-  platform: '⚡',
-  m365: '☁️',
-  ai: '🤖',
-  data: '📊',
-  dev: '💻',
-  all: '✨',
-  soft: '🤝',
+const categoryCodes: Record<string, string> = {
+  platform: 'PLT',
+  m365: 'M365',
+  ai: 'AI',
+  data: 'DATA',
+  dev: 'WEB',
+  all: 'ALL',
+  soft: 'OPS',
 }
 
 function getProficiencyPct(skill: Skill): number {
@@ -177,6 +179,13 @@ function SkillsPanel() {
   const cats = ['all', ...(Object.keys(skillCategories) as SkillCategory[]), 'soft'] as const
   const [cat, setCat] = useState<string>('platform')
   const ref = usePanelIn(cat)
+  const projectsShipped = stats.find((stat) => stat.label === 'Projects shipped to production')
+  const overviewStats = [
+    { value: String(skills.length), label: 'Specialized Skills' },
+    { value: String(Object.keys(skillCategories).length), label: 'Practice Areas' },
+    { value: profile.yearsBadge.value, label: 'Years Building' },
+    { value: `${projectsShipped?.value ?? 0}${projectsShipped?.suffix ?? ''}`, label: 'Production Projects' },
+  ]
 
   const list =
     cat === 'soft'
@@ -193,24 +202,13 @@ function SkillsPanel() {
 
   return (
     <div className="space-y-8">
-      {/* Overview Stat Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl border border-line-strong/60 bg-gradient-to-r from-surface-2/40 via-surface/30 to-bg/50 backdrop-blur-md">
-        <div className="flex flex-col">
-          <span className="font-wide text-2xl md:text-3xl text-gold">24+</span>
-          <span className="font-mono text-xs text-ink-3 uppercase tracking-wider mt-1">Specialized Skills</span>
-        </div>
-        <div className="flex flex-col">
-          <span className="font-wide text-2xl md:text-3xl text-gold">5</span>
-          <span className="font-mono text-xs text-ink-3 uppercase tracking-wider mt-1">Cloud Domains</span>
-        </div>
-        <div className="flex flex-col">
-          <span className="font-wide text-2xl md:text-3xl text-gold">3+</span>
-          <span className="font-mono text-xs text-ink-3 uppercase tracking-wider mt-1">Years Enterprise</span>
-        </div>
-        <div className="flex flex-col">
-          <span className="font-wide text-2xl md:text-3xl text-gold">25+</span>
-          <span className="font-mono text-xs text-ink-3 uppercase tracking-wider mt-1">Projects Delivered</span>
-        </div>
+      <div className="grid grid-cols-2 gap-4 rounded-2xl border border-line-strong/60 bg-gradient-to-r from-surface-2/40 via-surface/30 to-bg/50 p-5 backdrop-blur-md sm:grid-cols-4">
+        {overviewStats.map((stat) => (
+          <div key={stat.label} className="flex flex-col">
+            <span className="font-wide text-2xl text-gold md:text-3xl">{stat.value}</span>
+            <span className="mt-1 font-mono text-xs tracking-wider text-ink-3 uppercase">{stat.label}</span>
+          </div>
+        ))}
       </div>
 
       {/* Category Pills Switcher */}
@@ -226,11 +224,11 @@ function SkillsPanel() {
               onClick={() => setCat(c)}
               className={`group flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border ${
                 isSelected
-                  ? 'border-gold bg-gold/15 text-gold shadow-[0_0_16px_rgba(217,164,65,0.2)]'
+                  ? 'border-gold bg-gold/15 text-gold shadow-[0_0_16px_var(--glow)]'
                   : 'border-line-strong/60 bg-surface/40 text-ink-2 hover:border-gold/50 hover:text-ink'
               }`}
             >
-              <span>{categoryIcons[c]}</span>
+              <span className="font-mono text-[9px] tracking-[0.12em] text-ink-3">{categoryCodes[c]}</span>
               <span>{label}</span>
               <span
                 className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${
@@ -247,16 +245,14 @@ function SkillsPanel() {
       {/* Skills Grid */}
       <div ref={ref} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cat === 'soft' ? (
-          softSkills.map((s, idx) => {
-            const icons = ['🎯', '📝', '⚡', '🤝', '🎓', '💡', '🎤', '♿']
-            return (
+          softSkills.map((s, idx) => (
               <div
                 key={s}
                 className="p-item card group relative overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_12px_30px_rgba(0,0,0,0.15)]"
               >
                 <div className="flex items-start gap-4">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-surface-2 border border-line-strong text-2xl transition-transform duration-300 group-hover:scale-110">
-                    {icons[idx % icons.length]}
+                  <span className="grid size-12 shrink-0 place-items-center rounded-2xl border border-line-strong bg-surface-2 font-mono text-[11px] tracking-wider text-ink-3">
+                    {String(idx + 1).padStart(2, '0')}
                   </span>
                   <div>
                     <h3 className="font-wide text-lg text-ink group-hover:text-gold transition-colors">{s}</h3>
@@ -270,8 +266,7 @@ function SkillsPanel() {
                   <span>Verified Delivery Practice</span>
                 </div>
               </div>
-            )
-          })
+          ))
         ) : (
           list.map((s) => {
             const pct = getProficiencyPct(s)
@@ -309,13 +304,13 @@ function SkillsPanel() {
                     <span
                       className={`chip text-[10px] tracking-wide font-medium py-1 px-2.5 ${
                         isCore
-                          ? 'border-gold/50 bg-gold/15 text-gold shadow-[0_0_12px_rgba(217,164,65,0.2)]'
+                          ? 'border-gold/50 bg-gold/15 text-gold shadow-[0_0_12px_var(--glow)]'
                           : isStrong
-                          ? 'border-amber-400/40 bg-amber-400/10 text-amber-300'
-                          : 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
+                          ? 'border-line-strong bg-surface-2 text-ink-2'
+                          : 'border-line bg-surface text-ink-3'
                       }`}
                     >
-                      {isCore ? '✦ Core' : isStrong ? '✦ Strong' : '✦ Growth'}
+                      {isCore ? 'Core' : isStrong ? 'Strong' : 'Growth'}
                     </span>
                   </div>
 

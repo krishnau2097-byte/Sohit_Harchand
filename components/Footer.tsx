@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { nav, profile } from '@/content/profile'
 import { FadeIn } from './ui/FadeIn'
-import { RevealText } from './ui/RevealText'
 import { ArrowUpRight } from './ui/Icons'
 import { LocalTime } from './ui/LocalTime'
 import { RollText } from './ui/RollText'
@@ -10,7 +9,7 @@ import { FooterStoryName } from './FooterStoryName'
 export function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative overflow-x-clip border-t border-line bg-bg-2">
+    <footer className="relative overflow-clip border-t border-line bg-bg">
       <div className="blinds pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1440px] px-5 pt-20 pb-8 md:px-10">
         <FadeIn className="grid gap-12 md:grid-cols-12" items=".f-col">

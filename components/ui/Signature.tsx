@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { animate, svg, type Animatable } from 'animejs'
+import { animate } from 'animejs'
 import { isReducedMotion } from '@/lib/motion'
 
 type SignatureProps = {
@@ -9,20 +9,17 @@ type SignatureProps = {
   animated?: boolean
   width?: number | string
   height?: number | string
-  color?: string
   showFlourish?: boolean
 }
 
 /**
- * Handcrafted signature of "Sohit Harchand" with animated calligraphy flourish,
- * inspired by executive/creator personal brands (like Suneha's site logo).
+ * Handcrafted signature of "Sohit Harchand" with an animated calligraphy flourish.
  */
 export function Signature({
   className = '',
   animated = false,
   width = 240,
   height = 70,
-  color = 'var(--gold)',
   showFlourish = true,
 }: SignatureProps) {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -80,7 +77,7 @@ export function Signature({
               fontSize: '52px',
               fontStyle: 'italic',
               letterSpacing: '0.04em',
-              filter: 'drop-shadow(0 2px 8px rgba(217,164,65,0.3))',
+              filter: 'drop-shadow(0 2px 8px var(--glow))',
             }}
           >
             Sohit Harchand
@@ -120,7 +117,7 @@ export function SignatureLogo({ className = '' }: { className?: string }) {
       <span className="relative grid h-10 w-10 place-items-center shrink-0">
         <svg
           viewBox="0 0 40 40"
-          className="absolute inset-0 h-full w-full text-gold transition-transform duration-700 group-hover:rotate-90 drop-shadow-[0_0_10px_rgba(217,164,65,0.45)]"
+          className="absolute inset-0 h-full w-full text-gold transition-transform duration-700 group-hover:rotate-90 drop-shadow-[0_0_10px_var(--glow)]"
           aria-hidden="true"
         >
           <path d="M20 1.5 38.5 20 20 38.5 1.5 20Z" fill="none" stroke="currentColor" strokeWidth="1.2" />

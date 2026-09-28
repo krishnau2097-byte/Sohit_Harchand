@@ -188,7 +188,7 @@ export function Navbar() {
               <span className="relative grid h-10 w-10 place-items-center shrink-0">
                 <svg
                   viewBox="0 0 40 40"
-                  className="absolute inset-0 h-full w-full text-gold transition-transform duration-700 group-hover:rotate-90 drop-shadow-[0_0_8px_rgba(217,164,65,0.4)]"
+                  className="absolute inset-0 h-full w-full text-gold transition-transform duration-700 group-hover:rotate-90 drop-shadow-[0_0_8px_var(--glow)]"
                   aria-hidden="true"
                 >
                   <path d="M20 1.5 38.5 20 20 38.5 1.5 20Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
@@ -233,7 +233,7 @@ export function Navbar() {
               ))}
               <span
                 ref={underlineRef}
-                className="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-gold/15 border border-gold/30 opacity-0 shadow-[0_0_12px_rgba(217,164,65,0.2)]"
+                className="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-gold/15 border border-gold/30 opacity-0 shadow-[0_0_12px_var(--glow)]"
                 aria-hidden="true"
               />
             </ul>
@@ -247,7 +247,7 @@ export function Navbar() {
               <Magnetic>
                 <Link
                   href="/contact"
-                  className="btn btn-primary h-10 px-5 text-[13px] font-medium shadow-[0_4px_16px_rgba(217,164,65,0.25)] hover:shadow-[0_6px_25px_rgba(217,164,65,0.4)] transition-shadow"
+                  className="btn btn-primary h-10 px-5 text-[13px] font-medium"
                 >
                   Let&apos;s talk <ArrowUpRight size={15} />
                 </Link>
@@ -313,6 +313,7 @@ function MenuSheet({
     if (open) {
       lenis?.stop()
       document.documentElement.style.overflow = 'hidden'
+      el.style.display = 'block'
       el.style.visibility = 'visible'
       const links = el.querySelectorAll('.menu-link-inner')
       utils.set(links, { y: '110%' })
@@ -331,6 +332,7 @@ function MenuSheet({
       ease: 'inOut(4)',
       onComplete: () => {
         el.style.visibility = 'hidden'
+        el.style.display = 'none'
       },
     })
     originRef.current?.focus({ preventScroll: true })
@@ -360,7 +362,7 @@ function MenuSheet({
       aria-label="Site menu"
       aria-hidden={!open}
       className="blinds fixed inset-0 z-40 overflow-x-hidden overflow-y-auto bg-bg-2"
-      style={{ visibility: 'hidden', clipPath: 'circle(0px at 100% 0%)' }}
+      style={{ display: 'none', visibility: 'hidden', clipPath: 'circle(0px at 100% 0%)' }}
     >
       <div className="relative mx-auto grid min-h-full max-w-[1440px] gap-12 px-5 pt-28 pb-12 md:grid-cols-12 md:px-10">
         <nav aria-label="Pages" className="md:col-span-8">

@@ -258,7 +258,7 @@ export function Hero() {
   const manifesto = profile.manifesto.split(' ')
 
   return (
-    <section id="home" ref={wrapRef} aria-label="Introduction" className="hero-wrap pin-wrap relative h-[210vh]">
+    <section id="home" ref={wrapRef} aria-label="Introduction" className="hero-wrap pin-wrap relative h-[180vh]">
       <div className="pin-stage sticky top-0 h-svh overflow-clip motion-off:flex motion-off:flex-col">
         {/* Accent block revealed beneath the hero card */}
         <div className="manifesto absolute inset-0 flex items-center bg-block text-block-ink motion-off:relative motion-off:order-2 motion-off:py-28">

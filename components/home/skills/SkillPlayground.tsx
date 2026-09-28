@@ -304,10 +304,10 @@ export function SkillPlayground() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-ink-2">Grab a bubble and throw it. Bigger bubble = more experience.</p>
+        <p className="text-sm text-ink-2">Move a skill to see how each part of the toolkit connects.</p>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={() => apiRef.current?.shake()} className="chip hover:border-gold hover:text-gold">
-            ✦ Shake
+            Rearrange
           </button>
           <button
             type="button"
@@ -319,10 +319,10 @@ export function SkillPlayground() {
             }}
             className="chip hover:border-gold hover:text-gold aria-pressed:border-gold aria-pressed:text-gold"
           >
-            {gravity ? '◎ Zero gravity' : '↓ Gravity on'}
+            {gravity ? 'Zero gravity' : 'Gravity on'}
           </button>
           <button type="button" onClick={() => apiRef.current?.reset()} className="chip hover:border-gold hover:text-gold">
-            ↺ Drop again
+            Reset field
           </button>
         </div>
       </div>
@@ -332,12 +332,12 @@ export function SkillPlayground() {
         className="relative mt-6 h-[480px] touch-pan-y overflow-clip rounded-[2rem] border border-line bg-surface md:h-[560px]"
         style={{ backgroundImage: 'radial-gradient(circle at 50% 120%, var(--glow), transparent 60%)' }}
       >
-        <p className="sr-only">Interactive skills playground. The Cards view lists the same skills.</p>
+        <p className="sr-only">Interactive skills field. The Cards view lists the same skills.</p>
         <p className="font-wide text-outline pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-[clamp(2.5rem,9vw,8rem)] leading-none select-none" aria-hidden="true">
-          PLAY
+          EXPLORE
         </p>
         <p ref={hintRef} className="pointer-events-none absolute top-5 left-1/2 -translate-x-1/2 chip bg-surface/80 font-mono text-[11px] tracking-wider uppercase backdrop-blur" aria-hidden="true">
-          drag · throw · sweep
+          Drag to explore
         </p>
 
         {skills.map((s) => (

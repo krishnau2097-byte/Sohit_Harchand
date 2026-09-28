@@ -12,7 +12,7 @@ const wipe = ['inset(0% 0% 0% 0%)', 'inset(0% 0% 100% 0%)']
 
 /**
  * Pinned scroll story (the "image and text change on scroll" effect).
- * A 320vh section holds a sticky 100vh stage; one Anime.js timeline is
+ * A 270vh section holds a sticky 100vh stage; one Anime.js timeline is
  * scrubbed by onScroll({ sync: true }) so chapter images wipe away with a
  * clip-path while text lines slide out and the next chapter's lines slide in.
  * Phones get stacked cards instead of a pin.
@@ -99,12 +99,12 @@ export function ScrollStory() {
       </h2>
 
       {/* Desktop: pinned stage */}
-      <div className="story-desktop pin-wrap relative hidden h-[320vh] md:block">
+      <div className="story-desktop pin-wrap relative hidden h-[270vh] md:block">
         <div className="story-pin pin-stage sticky top-0 h-svh overflow-hidden">
           <div className="mx-auto grid h-full max-w-[1440px] grid-cols-12 items-center gap-8 px-10">
             <div className="col-span-12 flex items-center justify-between self-end pt-24 motion-off:hidden">
               <p className="eyebrow">01 — The story</p>
-              <p className="font-mono text-xs text-ink-3">Keep scrolling</p>
+              <p className="font-mono text-xs text-ink-3">Scroll to move through</p>
             </div>
 
             <div className="relative col-span-6 aspect-[4/5] h-[64vh] max-w-full self-start justify-self-center overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[var(--shadow)] motion-off:aspect-auto motion-off:h-auto motion-off:space-y-6 motion-off:overflow-visible motion-off:border-0 motion-off:bg-transparent">

@@ -4,84 +4,84 @@
 @custom-variant motion-off (&:where(.reduce-motion, .reduce-motion *));
 
 /* ------------------------------------------------------------------
-   Theme tokens. Light "paper & brass" is the default; dark is
-   "obsidian & gold". Both are also selectable per element with
+   Semantic theme tokens. Light uses warm stone and brass; dark uses
+   graphite, soft ivory and muted brass. Both are selectable per element with
    data-theme, which the hero lens uses to show the other theme
    under the cursor. Components only ever use these tokens.
 ------------------------------------------------------------------- */
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #f4eee4;
-  --bg-2: #ece4d6;
-  --surface: #fffcf6;
-  --surface-2: #f1e9dc;
-  --line: rgba(60, 44, 20, 0.13);
-  --line-strong: rgba(60, 44, 20, 0.28);
-  --ink: #17130e;
-  --ink-2: #4a4238;
-  --ink-3: #6b6256;
-  --gold: #8a6420;
-  --gold-2: #6f5018;
-  --gold-3: #c0923f;
-  --ember: #c8401a;
-  --ember-2: #e0602f;
-  --on-gold: #fffcf6;
-  --block-bg: #17130e;
-  --block-ink: #f4eee4;
-  --glow: rgba(192, 146, 63, 0.28);
-  --shadow: 0 30px 70px -35px rgba(60, 40, 10, 0.4);
-  --blind: rgba(70, 48, 18, 0.18);
-  --blind-light: rgba(255, 246, 225, 0.55);
-  --grain-opacity: 0.045;
+  --bg: #f4f1e9;
+  --bg-2: #eae8df;
+  --surface: #fbfaf6;
+  --surface-2: #f0eee7;
+  --line: rgba(38, 45, 39, 0.11);
+  --line-strong: rgba(38, 45, 39, 0.24);
+  --ink: #181c19;
+  --ink-2: #4d564e;
+  --ink-3: #70796f;
+  --gold: #786641;
+  --gold-2: #5f5032;
+  --gold-3: #a58a57;
+  --ember: #a9583e;
+  --ember-2: #c67555;
+  --on-gold: #fbfaf6;
+  --block-bg: #181c19;
+  --block-ink: #f4f1e9;
+  --glow: rgba(165, 138, 87, 0.17);
+  --shadow: 0 30px 70px -35px rgba(32, 37, 30, 0.28);
+  --blind: rgba(46, 48, 38, 0.12);
+  --blind-light: rgba(255, 252, 237, 0.4);
+  --grain-opacity: 0.025;
 
-  --cursor-gold: #d49a29;
-  --cursor-gold-ring: rgba(212, 154, 41, 0.7);
-  --cursor-gold-bg: rgba(212, 154, 41, 0.1);
-  --cursor-glow: rgba(212, 154, 41, 0.45);
+  --cursor-gold: #8c744b;
+  --cursor-gold-ring: rgba(119, 99, 62, 0.5);
+  --cursor-gold-bg: rgba(119, 99, 62, 0.035);
+  --cursor-glow: rgba(119, 99, 62, 0.12);
 
-  --cat-platform: #8a6420;
-  --cat-m365: #b0660f;
-  --cat-ai: #c8401a;
-  --cat-data: #2f6f68;
-  --cat-dev: #2b2620;
+  --cat-platform: #786641;
+  --cat-m365: #9a693b;
+  --cat-ai: #a9583e;
+  --cat-data: #397267;
+  --cat-dev: #343c35;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0a0908;
-  --bg-2: #110f0d;
-  --surface: #171411;
-  --surface-2: #211d18;
-  --line: rgba(226, 194, 133, 0.14);
-  --line-strong: rgba(226, 194, 133, 0.34);
-  --ink: #f3ece0;
-  --ink-2: #bdb4a5;
-  --ink-3: #8f8778;
-  --gold: #e2c285;
-  --gold-2: #c9a45f;
-  --gold-3: #f6e2b8;
-  --ember: #ff6a3d;
-  --ember-2: #ff9a5a;
-  --on-gold: #120f0b;
-  --block-bg: #e2c285;
-  --block-ink: #120f0b;
-  --glow: rgba(226, 194, 133, 0.22);
-  --shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
-  --blind: rgba(0, 0, 0, 0.55);
-  --blind-light: rgba(255, 214, 150, 0.07);
-  --grain-opacity: 0.07;
+  --bg: #101311;
+  --bg-2: #171b18;
+  --surface: #1c221e;
+  --surface-2: #252d27;
+  --line: rgba(231, 233, 223, 0.1);
+  --line-strong: rgba(231, 233, 223, 0.22);
+  --ink: #f1f0e9;
+  --ink-2: #c4c9c0;
+  --ink-3: #969e93;
+  --gold: #d1b77f;
+  --gold-2: #b49a63;
+  --gold-3: #e3d0a5;
+  --ember: #d78562;
+  --ember-2: #e5a07c;
+  --on-gold: #171811;
+  --block-bg: #d8c9a4;
+  --block-ink: #1b1c17;
+  --glow: rgba(195, 165, 106, 0.13);
+  --shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.72);
+  --blind: rgba(0, 0, 0, 0.42);
+  --blind-light: rgba(255, 237, 202, 0.045);
+  --grain-opacity: 0.035;
 
-  --cursor-gold: #e2c285;
-  --cursor-gold-ring: rgba(226, 194, 133, 0.75);
-  --cursor-gold-bg: rgba(226, 194, 133, 0.12);
-  --cursor-glow: rgba(226, 194, 133, 0.4);
+  --cursor-gold: #e3d0a5;
+  --cursor-gold-ring: rgba(227, 208, 165, 0.52);
+  --cursor-gold-bg: rgba(227, 208, 165, 0.035);
+  --cursor-glow: rgba(227, 208, 165, 0.14);
 
-  --cat-platform: #e2c285;
-  --cat-m365: #d8a657;
-  --cat-ai: #ff7a45;
-  --cat-data: #7cc7b6;
-  --cat-dev: #f3ece0;
+  --cat-platform: #d1b77f;
+  --cat-m365: #d59a68;
+  --cat-ai: #e08d70;
+  --cat-data: #89c2b1;
+  --cat-dev: #e8e8de;
 }
 
 @theme inline {
@@ -237,13 +237,17 @@ body::after {
   gap: 0.6rem;
   height: 3.1rem;
   padding: 0 1.5rem;
+  border: 1px solid transparent;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.92rem;
-  overflow: hidden;
-  isolation: isolate;
   white-space: nowrap;
-  transition: color 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
 }
 
 .btn-primary {
@@ -251,34 +255,30 @@ body::after {
   color: var(--on-gold);
 }
 
-.btn-ghost {
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
+.btn-primary:hover {
+  background: var(--gold-2);
+  box-shadow: 0 8px 22px -12px var(--glow);
+  transform: translateY(-1px);
 }
 
-/* Liquid fill on hover (both buttons). */
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  transform: translateY(101%);
-  transition: transform 0.55s var(--ease-out-expo);
+.btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background: color-mix(in oklab, var(--surface) 35%, transparent);
 }
-.btn-primary::before {
-  background: var(--gold-3);
-}
-.btn-ghost::before {
-  background: var(--gold);
-}
-.btn:hover::before {
-  transform: translateY(0);
-}
+
 .btn-ghost:hover {
-  color: var(--on-gold);
   border-color: var(--gold);
+  color: var(--gold);
+  background: color-mix(in oklab, var(--gold) 7%, var(--surface));
+  transform: translateY(-1px);
 }
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 
 .card {
   background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, var(--gold) 8%), var(--surface));

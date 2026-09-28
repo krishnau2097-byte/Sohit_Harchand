@@ -42,7 +42,7 @@ export function Portrait({ variant = 'default', idPrefix = 'p', src, alt, classN
           height={1395}
           priority={true}
           sizes="(max-width: 768px) 85vw, 45vw"
-          className="h-full w-auto max-h-full max-w-full object-contain object-bottom select-none filter drop-shadow-[0_20px_45px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_18px_rgba(217,164,65,0.22)]"
+          className="h-full w-auto max-h-full max-w-full object-contain object-bottom select-none filter drop-shadow-[0_20px_45px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_18px_var(--glow)]"
           draggable={false}
         />
         {/* Subtle bottom fade to blend seamlessly into card */}
