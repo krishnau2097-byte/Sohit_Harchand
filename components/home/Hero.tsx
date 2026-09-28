@@ -262,9 +262,9 @@ export function Hero() {
       <div className="pin-stage sticky top-0 h-svh overflow-clip motion-off:flex motion-off:flex-col">
         {/* Accent block revealed beneath the hero card */}
         <div className="manifesto absolute inset-0 flex items-center bg-block text-block-ink motion-off:relative motion-off:order-2 motion-off:py-28">
-          <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10">
-            <p className="font-mono text-xs tracking-[0.25em] uppercase opacity-70">Positioning</p>
-            <p className="font-wide mt-6 max-w-[22ch] text-[clamp(1.9rem,4.6vw,4.4rem)] leading-[1.02] md:max-w-[26ch]">
+          <div className="mx-auto w-full max-w-[1440px] px-5 md:translate-y-16 md:px-[5vw]">
+            <p className="font-mono text-xs tracking-[0.25em] uppercase opacity-70 md:pl-6">Positioning</p>
+            <p className="font-wide mt-6 max-w-[22ch] text-[clamp(1.9rem,4.1vw,4rem)] leading-[1.02] md:max-w-[26ch]">
               {manifesto.map((w, i) => (
                 <span key={i} className="manifesto-word">
                   {w}{' '}
