@@ -1,103 +1,66 @@
 /**
  * Everything personal lives here. Components never hard-code copy.
+ * Source of truth: Sohit_Resume_Updated.docx. Keep this file in step with the résumé.
  */
 
 export const profile = {
+  /** Used only in machine-readable metadata (JSON-LD), never shown on the page. */
   name: 'Sohit Harchand',
-  initials: 'SH',
-  brand: 'Based in Punjab, India · working with teams anywhere',
-  role: 'Power Platform & React Developer',
-  eyebrow: 'Power Platform · React · AI/ML',
+  /** The visible brand: the site shows the signature monogram instead of a name. */
+  monogram: 'SH',
+  role: 'Power Platform & Dynamics 365 Developer',
+  headline: 'Copilot Studio & Azure OpenAI Agents',
+  eyebrow: 'Dynamics 365 · Power Platform · AI Agents',
 
-  /** Giant hero word + alternates cycled with scrambleText. Keep them 8–10 letters so the fit stays even. */
-  heroWords: ['DEVELOPER', 'AUTOMATOR', 'INNOVATOR', 'ENGINEER'],
+  /** Hero sentence: "I build <word> on the Microsoft stack." The word cycles; keep each under ~20 characters so it fits one line on phones. */
+  heroWords: ['CRM solutions', 'Copilot agents', 'automated workflows', 'Fabric migrations'],
 
-  tagline: 'Apps that ship. Automation that lasts.',
-  /** Big badge on the right of the hero. */
-  yearsBadge: { value: '2+', label: 'Years · Microsoft & React stack' },
-  pitch:
-    'I build enterprise solutions: Power Apps, Power Automate flows, React frontends, and AI-powered tools that transform how teams work — from report migration platforms to intelligent learning systems.',
-
-  /** Shown as the full-width manifesto revealed under the hero card. */
-  manifesto:
-    'Two years of turning complex business problems into elegant digital solutions. From migrating Tableau reports to Power BI at scale, to building AI-powered learning platforms — I learn fast, build carefully and keep shipping until the problem is really solved.',
+  summary:
+    'Microsoft Dynamics 365 and Power Platform Developer with 2+ years of experience delivering enterprise CRM, workflow automation and AI agent solutions on the Microsoft stack.',
 
   about: [
-    'I started my career in 2024 as a Power Platform Intern at AOSC Technologies in Punjab, building canvas apps and automated workflows for enterprise clients.',
-    'Since then I have grown into a Power Platform & React Developer, leading frontend development for migration platforms like Switchblade, building AI-enabled learning tools, and delivering SharePoint solutions and Power BI reports for businesses across India.',
-    'Right now I am deepening my expertise in React, Python backend development, LLM integration, and Copilot Studio agents while pursuing my MCA with AI/ML specialization at LPU.',
+    'I am a Microsoft Dynamics 365 and Power Platform Developer with 2+ years of experience delivering enterprise CRM, workflow automation and AI agent solutions on the Microsoft stack.',
+    'I have built Copilot Studio and Azure OpenAI agents for document analysis, employee onboarding and assessment evaluation, plus AI-driven tooling that migrates Qlik and Tableau semantic models to Microsoft Fabric using TMDL.',
+    'Day to day I work with PCF controls (TypeScript), Power Apps, Power Automate, Dataverse, Azure Functions and Azure DevOps CI/CD, taking solutions from Dev through UAT to Production.',
   ],
 
-  location: 'Pathankot, Punjab, India',
-  /** IANA time zone for the live clock, e.g. 'Australia/Sydney' or 'Europe/London'. */
+  location: 'Amritsar, Punjab, India',
+  /** IANA time zone for the live clock. */
   timeZone: 'Asia/Kolkata',
-  email: 'Thakursaabji9@gmail.com',
-  phone: '',
-  resumeUrl: '/resume.pdf',
+  email: 'thakursaabji9@gmail.com',
 
-  availability: {
-    open: true,
-    label: 'Open to new roles & projects',
-    detail: 'Happy to talk about full-time roles and freelance builds.',
-  },
-
-  /** Set to real user transparent cutouts from /image folder */
-  portrait: '/images/portrait-cutout.webp',
-  aboutPortrait: '/images/portrait-full-cutout.webp',
+  availability: 'Open to new roles and projects',
 
   socials: [
-    { label: 'LinkedIn', handle: '/in/sohit-harchand', href: 'https://www.linkedin.com/in/sohit-harchand' },
-    { label: 'GitHub', handle: '@sohitharchand', href: 'https://github.com/sohitharchand' },
-    { label: 'Email', handle: 'Thakursaabji9@gmail.com', href: 'mailto:Thakursaabji9@gmail.com' },
+    { label: 'LinkedIn', handle: 'View my profile', href: 'https://www.linkedin.com/in/sohit-thakur-6ab058317' },
+    { label: 'Email', handle: 'thakursaabji9@gmail.com', href: 'mailto:thakursaabji9@gmail.com' },
   ],
-
-  /** Services pill bar across the top of the hero (marquee on mobile). */
-  services: [
-    'Power Apps',
-    'Power Automate',
-    'React.js',
-    'Copilot Studio Agents',
-    'Python',
-    'Power BI',
-    'SharePoint',
-    'AI/ML',
-  ],
-
-  /** Tech chips shown above the H1. */
-  techChips: ['Power Platform', 'React', 'Python', 'AI/ML'],
 } as const
 
-export const site = {
-  url: 'https://sohitharchand.com',
-  title: 'Sohit Harchand — Power Platform & React Developer',
-  description:
-    'Portfolio of Sohit Harchand, a Power Platform & React Developer with experience building migration platforms, AI-powered tools, and enterprise automation solutions.',
-}
-
-export const stats = [
-  { value: 2, suffix: '+', label: 'Years building enterprise solutions' },
-  { value: 8, suffix: '+', label: 'Projects shipped to production' },
-  { value: 5, suffix: '+', label: 'Teams & clients supported' },
-  { value: 50, suffix: '+', label: 'Automated workflows running' },
-  { value: 1, suffix: 'k+', label: 'Users on solutions I built' },
-  { value: 24, suffix: '+', label: 'Tools & technologies mastered' },
+/** Footer "Services" column, in the reference site's style. */
+export const services = [
+  'Dynamics 365 CE Solutions',
+  'Power Apps & Power Pages',
+  'Power Automate & Azure Integration',
+  'Copilot Studio & Azure OpenAI Agents',
+  'Microsoft Fabric & Power BI',
 ]
+
+/**
+ * Production URL. Set NEXT_PUBLIC_SITE_URL once a custom domain exists;
+ * on Vercel the project's production URL is used automatically.
+ */
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+export const site = {
+  url: process.env.NEXT_PUBLIC_SITE_URL || (vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000'),
+  title: `${profile.monogram} — ${profile.role}`,
+  description:
+    'Power Platform and Dynamics 365 developer building enterprise CRM, workflow automation and Copilot Studio / Azure OpenAI agent solutions on the Microsoft stack.',
+}
 
 export const nav = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Skills', href: '/about#skills' },
-  { label: 'Experience', href: '/about#experience' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
-] as const
-
-/** Sections tracked by the scroll-spy underline on the home page. */
-export const homeSections = [
-  { id: 'home', label: 'Home' },
-  { id: 'story', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'work', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
 ] as const

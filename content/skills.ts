@@ -1,66 +1,38 @@
-/**
- * Skills shown as flip cards and as the physics playground.
- * Real skills based on work at AOSC Technologies and academic background.
- */
+/** Core skills, grouped exactly as on the résumé. */
 
-export type SkillCategory = 'platform' | 'm365' | 'ai' | 'data' | 'dev'
-export type SkillLevel = 'Core' | 'Strong' | 'Growing'
+export const skillGroups = [
+  {
+    id: 'platform',
+    label: 'Power Platform',
+    items: ['Power Apps', 'Power Automate', 'Power Pages', 'Dataverse', 'Power BI', 'Copilot Studio', 'AI Builder', 'Power Fx', 'Solution Management & ALM'],
+  },
+  {
+    id: 'd365',
+    label: 'Dynamics 365',
+    items: ['D365 CE', 'Business Process Flows', 'Security Roles', 'PCF Controls', 'JavaScript Web Resources'],
+  },
+  {
+    id: 'ai',
+    label: 'AI & Agents',
+    items: ['Azure OpenAI', 'Copilot Studio Agents', 'RAG', 'Prompt Engineering', 'LLM-based Workflows', 'TMDL Generation'],
+  },
+  {
+    id: 'azure',
+    label: 'Azure & Integration',
+    items: ['Azure Functions', 'Logic Apps', 'API Management', 'Log Analytics', 'Dataverse Web API', 'OData', 'REST APIs', 'Custom Connectors', 'Webhooks'],
+  },
+  {
+    id: 'data',
+    label: 'Data & Analytics',
+    items: ['Microsoft Fabric', 'SQL Server', 'Azure SQL', 'Data Modeling', 'Data Migration'],
+  },
+  {
+    id: 'devops',
+    label: 'DevOps & Tools',
+    items: ['Azure DevOps', 'Git / GitHub', 'GitHub Actions', 'Docker', 'Postman', 'Agile / Scrum'],
+  },
+] as const
 
-export const skillCategories: Record<SkillCategory, { label: string; tone: string }> = {
-  platform: { label: 'Power Platform', tone: 'var(--cat-platform)' },
-  m365: { label: 'Microsoft 365 & SharePoint', tone: 'var(--cat-m365)' },
-  ai: { label: 'AI & Copilot', tone: 'var(--cat-ai)' },
-  data: { label: 'Data & Analytics', tone: 'var(--cat-data)' },
-  dev: { label: 'Code & Integration', tone: 'var(--cat-dev)' },
-}
+export type SkillGroupId = (typeof skillGroups)[number]['id']
 
-export const levelRank: Record<SkillLevel, number> = { Core: 3, Strong: 2, Growing: 1 }
-
-export type Skill = {
-  symbol: string
-  name: string
-  years: number
-  level: SkillLevel
-  category: SkillCategory
-  /** Shown on the back of the card. */
-  note: string
-}
-
-export const skills: Skill[] = [
-  { symbol: 'Pa', name: 'Power Apps', years: 2, level: 'Core', category: 'platform', note: 'Canvas and model-driven apps, offline forms, custom components.' },
-  { symbol: 'Au', name: 'Power Automate', years: 2, level: 'Core', category: 'platform', note: 'Approvals, scheduled jobs, error handling and child flows.' },
-  { symbol: 'Bi', name: 'Power BI', years: 2, level: 'Strong', category: 'platform', note: 'Star-schema models, DAX measures, Power Query and row-level security.' },
-  { symbol: 'Px', name: 'Power Fx', years: 2, level: 'Strong', category: 'platform', note: 'Formulas, named formulas, delegation-aware queries.' },
-  { symbol: 'Pp', name: 'Power Pages', years: 1, level: 'Growing', category: 'platform', note: 'Public portals with forms, lists and table permissions.' },
-  { symbol: 'Sp', name: 'SharePoint', years: 2, level: 'Core', category: 'm365', note: 'Sites, lists, libraries, permissions and page design.' },
-  { symbol: 'Tm', name: 'Teams Apps', years: 1, level: 'Strong', category: 'm365', note: 'Apps and adaptive-card approvals inside Teams.' },
-  { symbol: 'Gr', name: 'Microsoft Graph', years: 1, level: 'Growing', category: 'm365', note: 'Users, groups and mail through HTTP actions.' },
-  { symbol: 'En', name: 'Entra ID', years: 1, level: 'Growing', category: 'm365', note: 'App registrations, groups and conditional access basics.' },
-  { symbol: 'Cs', name: 'Copilot Studio', years: 1, level: 'Strong', category: 'ai', note: 'Topics, knowledge sources, actions and evaluation.' },
-  { symbol: 'Ai', name: 'OpenAI / LLMs', years: 1, level: 'Strong', category: 'ai', note: 'GPT integration, prompt engineering, RAG pipelines and LangChain.' },
-  { symbol: 'Ab', name: 'AI Builder', years: 1, level: 'Growing', category: 'ai', note: 'Document processing and text classification models.' },
-  { symbol: 'Ml', name: 'Machine Learning', years: 2, level: 'Strong', category: 'ai', note: 'TensorFlow, scikit-learn, deep learning and model training.' },
-  { symbol: 'Sq', name: 'SQL', years: 2, level: 'Strong', category: 'data', note: 'Queries, views, data migration scripts and optimization.' },
-  { symbol: 'Pq', name: 'Power Query', years: 2, level: 'Core', category: 'data', note: 'Cleaning and shaping data for reports and dataflows.' },
-  { symbol: 'Pg', name: 'PostgreSQL', years: 1, level: 'Growing', category: 'data', note: 'Database design, queries and backend data storage.' },
-  { symbol: 'Ex', name: 'Excel & Scripts', years: 2, level: 'Strong', category: 'data', note: 'Office Scripts and Excel automation with flows.' },
-  { symbol: 'Re', name: 'React.js', years: 2, level: 'Core', category: 'dev', note: 'Component architecture, hooks, state management and React Router.' },
-  { symbol: 'Nx', name: 'Next.js', years: 1, level: 'Strong', category: 'dev', note: 'App Router, SSR, static generation and API routes.' },
-  { symbol: 'Ts', name: 'TypeScript', years: 2, level: 'Strong', category: 'dev', note: 'Type-safe React apps, API integrations and build tooling.' },
-  { symbol: 'Py', name: 'Python', years: 2, level: 'Strong', category: 'dev', note: 'FastAPI, data processing, automation scripts and ML pipelines.' },
-  { symbol: 'Ap', name: 'REST APIs', years: 2, level: 'Strong', category: 'dev', note: 'Custom connectors, OAuth and pagination.' },
-  { symbol: 'Gt', name: 'Git & DevOps', years: 2, level: 'Strong', category: 'dev', note: 'Version control, branching strategies and CI/CD pipelines.' },
-  { symbol: 'Tw', name: 'Tailwind CSS', years: 1, level: 'Strong', category: 'dev', note: 'Utility-first styling, responsive design and component systems.' },
-]
-
-/** Grouped lists for the About page Skills tab. */
-export const softSkills = [
-  'Requirements workshops',
-  'Clear documentation',
-  'Fast prototyping',
-  'Working in agile teams',
-  'User training',
-  'Curiosity & self-learning',
-  'Presenting to stakeholders',
-  'Problem-solving mindset',
-]
+export const skillCount = skillGroups.reduce((n, g) => n + g.items.length, 0)

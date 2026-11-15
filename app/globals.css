@@ -1,87 +1,50 @@
 @import "tailwindcss";
 
 @custom-variant light (&:where([data-theme=light], [data-theme=light] *));
-@custom-variant motion-off (&:where(.reduce-motion, .reduce-motion *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* ------------------------------------------------------------------
-   Theme tokens. Light "paper & brass" is the default; dark is
-   "obsidian & gold". Both are also selectable per element with
-   data-theme, which the hero lens uses to show the other theme
-   under the cursor. Components only ever use these tokens.
+   Tokens. Light is the default; dark is opt-in from the toggle.
 ------------------------------------------------------------------- */
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #f4eee4;
-  --bg-2: #ece4d6;
-  --surface: #fffcf6;
-  --surface-2: #f1e9dc;
-  --line: rgba(60, 44, 20, 0.13);
-  --line-strong: rgba(60, 44, 20, 0.28);
-  --ink: #17130e;
-  --ink-2: #4a4238;
-  --ink-3: #6b6256;
-  --gold: #8a6420;
-  --gold-2: #6f5018;
-  --gold-3: #c0923f;
-  --ember: #c8401a;
-  --ember-2: #e0602f;
+  --bg: #f7f4ee;
+  --bg-2: #f0ebe1;
+  --surface: #fffdf9;
+  --surface-2: #f5f0e7;
+  --line: rgba(48, 36, 18, 0.1);
+  --line-strong: rgba(48, 36, 18, 0.22);
+  --ink: #1d1913;
+  --ink-2: #4c453b;
+  --ink-3: #6f665a;
+  --gold: #86601d;
+  --gold-2: #6c4d16;
+  --gold-3: #c49a4a;
+  --ember: #b9531f;
   --on-gold: #fffcf6;
-  --block-bg: #17130e;
-  --block-ink: #f4eee4;
-  --glow: rgba(192, 146, 63, 0.28);
-  --shadow: 0 30px 70px -35px rgba(60, 40, 10, 0.4);
-  --blind: rgba(70, 48, 18, 0.18);
-  --blind-light: rgba(255, 246, 225, 0.55);
-  --grain-opacity: 0.045;
-
-  --cursor-gold: #d49a29;
-  --cursor-gold-ring: rgba(212, 154, 41, 0.7);
-  --cursor-gold-bg: rgba(212, 154, 41, 0.1);
-  --cursor-glow: rgba(212, 154, 41, 0.45);
-
-  --cat-platform: #8a6420;
-  --cat-m365: #b0660f;
-  --cat-ai: #c8401a;
-  --cat-data: #2f6f68;
-  --cat-dev: #2b2620;
+  --glow: rgba(196, 154, 74, 0.2);
+  --shadow: 0 18px 40px -24px rgba(60, 40, 10, 0.35);
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0a0908;
-  --bg-2: #110f0d;
-  --surface: #171411;
-  --surface-2: #211d18;
-  --line: rgba(226, 194, 133, 0.14);
-  --line-strong: rgba(226, 194, 133, 0.34);
-  --ink: #f3ece0;
-  --ink-2: #bdb4a5;
-  --ink-3: #8f8778;
+  --bg: #13110e;
+  --bg-2: #18150f;
+  --surface: #1c1914;
+  --surface-2: #242019;
+  --line: rgba(226, 194, 133, 0.12);
+  --line-strong: rgba(226, 194, 133, 0.28);
+  --ink: #f2ebdf;
+  --ink-2: #c3b9a9;
+  --ink-3: #978e80;
   --gold: #e2c285;
   --gold-2: #c9a45f;
-  --gold-3: #f6e2b8;
-  --ember: #ff6a3d;
-  --ember-2: #ff9a5a;
-  --on-gold: #120f0b;
-  --block-bg: #e2c285;
-  --block-ink: #120f0b;
-  --glow: rgba(226, 194, 133, 0.22);
-  --shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
-  --blind: rgba(0, 0, 0, 0.55);
-  --blind-light: rgba(255, 214, 150, 0.07);
-  --grain-opacity: 0.07;
-
-  --cursor-gold: #e2c285;
-  --cursor-gold-ring: rgba(226, 194, 133, 0.75);
-  --cursor-gold-bg: rgba(226, 194, 133, 0.12);
-  --cursor-glow: rgba(226, 194, 133, 0.4);
-
-  --cat-platform: #e2c285;
-  --cat-m365: #d8a657;
-  --cat-ai: #ff7a45;
-  --cat-data: #7cc7b6;
-  --cat-dev: #f3ece0;
+  --gold-3: #f3dcae;
+  --ember: #f08a55;
+  --on-gold: #15120d;
+  --glow: rgba(226, 194, 133, 0.14);
+  --shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.7);
 }
 
 @theme inline {
@@ -98,23 +61,13 @@
   --color-gold-2: var(--gold-2);
   --color-gold-3: var(--gold-3);
   --color-ember: var(--ember);
-  --color-ember-2: var(--ember-2);
   --color-on-gold: var(--on-gold);
-  --color-block: var(--block-bg);
-  --color-block-ink: var(--block-ink);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), sans-serif;
-  --font-serif: var(--font-instrument), Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-  --font-signature: var(--font-signature), 'Alex Brush', cursive;
+  --font-script: var(--font-signature), cursive;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.font-signature {
-  font-family: var(--font-signature);
 }
 
 /* ------------------------------------------------------------------
@@ -122,26 +75,19 @@
 ------------------------------------------------------------------- */
 html {
   background: var(--bg);
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   -webkit-text-size-adjust: 100%;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-stopped {
-  overflow: clip;
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
   overflow-x: clip;
-  transition: background-color 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -155,77 +101,79 @@ body {
   border-radius: 6px;
 }
 
-/* Film grain over everything: fixed, cheap, no repaint on scroll. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  z-index: 90;
-  pointer-events: none;
-  opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 /* ------------------------------------------------------------------
-   Typography helpers
+   Layout, typography and UI primitives. Kept in the components layer
+   so Tailwind utilities (md:hidden, text-ink-3, …) can override them.
 ------------------------------------------------------------------- */
-.font-wide {
-  font-family: var(--font-display);
-  font-variation-settings: "wdth" var(--wdth, 125);
-  font-weight: var(--wght, 800);
-  letter-spacing: -0.02em;
-  line-height: 0.9;
+@layer components {
+.container-page {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-page {
+    padding-inline: 2.5rem;
+  }
 }
 
-.font-condensed {
-  font-family: var(--font-display);
-  font-variation-settings: "wdth" var(--wdth, 70);
-  font-weight: var(--wght, 800);
-  line-height: 0.88;
+.section {
+  padding-block: 4.5rem;
+}
+@media (min-width: 768px) {
+  .section {
+    padding-block: 6rem;
+  }
 }
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold);
 }
 
-.text-gold-gradient {
-  background: linear-gradient(100deg, var(--gold-3) 0%, var(--gold) 28%, var(--gold-2) 52%, var(--gold-3) 74%, var(--gold) 100%);
+/* The one accent treatment: a slow gold → ember sheen on a key word. */
+.text-accent {
+  background: linear-gradient(100deg, var(--gold) 0%, var(--ember) 45%, var(--gold-3) 70%, var(--gold) 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: shimmer 7s linear infinite;
+  animation: sheen 8s linear infinite;
 }
-
-@keyframes shimmer {
+@keyframes sheen {
   to {
     background-position: -220% 0;
   }
 }
 
-.text-outline {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--line-strong);
-}
-
-/* ------------------------------------------------------------------
-   UI primitives
-------------------------------------------------------------------- */
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 0.35rem 0.8rem;
+  padding: 0.2rem 0.65rem;
   font-size: 0.75rem;
+  line-height: 1.5;
   color: var(--ink-2);
-  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  background: var(--surface);
   white-space: nowrap;
 }
 
@@ -234,252 +182,293 @@ body::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  height: 3.1rem;
-  padding: 0 1.5rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.92rem;
-  overflow: hidden;
-  isolation: isolate;
+  gap: 0.5rem;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 0.9rem;
   white-space: nowrap;
-  transition: color 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-out-expo), box-shadow 0.25s ease;
 }
-
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
 .btn-primary {
   background: var(--gold);
   color: var(--on-gold);
+  box-shadow: 0 10px 24px -14px var(--gold);
 }
-
+.btn-primary:hover {
+  background: var(--gold-2);
+}
 .btn-ghost {
   border: 1px solid var(--line-strong);
   color: var(--ink);
-}
-
-/* Liquid fill on hover (both buttons). */
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  transform: translateY(101%);
-  transition: transform 0.55s var(--ease-out-expo);
-}
-.btn-primary::before {
-  background: var(--gold-3);
-}
-.btn-ghost::before {
-  background: var(--gold);
-}
-.btn:hover::before {
-  transform: translateY(0);
+  background: var(--surface);
 }
 .btn-ghost:hover {
-  color: var(--on-gold);
   border-color: var(--gold);
+  color: var(--gold);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  color: var(--ink-2);
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.25s var(--ease-out-expo);
+}
+.icon-btn:hover {
+  color: var(--gold);
+  background: var(--surface-2);
+  transform: translateY(-2px);
 }
 
 .card {
-  background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, var(--gold) 8%), var(--surface));
+  position: relative;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, transform 0.35s var(--ease-out-expo), box-shadow 0.35s ease;
+}
+.card-hover:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
-.hairline {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
-}
-
-.visually-hidden {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-/* ------------------------------------------------------------------
-   Hero: window-blind shadows + warm key light (from the reference pin)
-------------------------------------------------------------------- */
-.blinds {
-  background-image:
-    radial-gradient(60% 70% at 72% 30%, var(--glow), transparent 70%),
-    radial-gradient(40% 50% at 20% 80%, color-mix(in oklab, var(--ember) 10%, transparent), transparent 70%);
-}
-.blinds::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  background: repeating-linear-gradient(
-    118deg,
-    var(--blind-light) 0 46px,
-    var(--blind) 46px 92px
-  );
-  filter: blur(14px);
-  mask-image: radial-gradient(75% 70% at 65% 40%, #000 20%, transparent 75%);
-  opacity: 0.9;
-}
-
-/* Marquee (pill bar + technology row) */
-.marquee {
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-}
-
-/* Custom cursor only for fine pointers */
-@media (hover: none), (pointer: coarse) {
-  .cursor-blob,
-  .cursor-ring,
-  .cursor-label {
-    display: none;
-  }
-}
-html.has-cursor,
-html.has-cursor a,
-html.has-cursor button {
-  cursor: none;
-}
-html.has-cursor input,
-html.has-cursor textarea,
-html.has-cursor select {
-  cursor: text;
-}
-
-/* ------------------------------------------------------------------
-   Letter-roll hover: each character slides up and a copy rolls in
-   from below, staggered by --i.
-------------------------------------------------------------------- */
-.roll {
-  display: inline-flex;
-  overflow: hidden;
-  vertical-align: top;
-  line-height: 1.25;
-}
-.roll-char {
-  position: relative;
-  display: inline-block;
-  white-space: pre;
-  transition: transform 0.55s var(--ease-out-expo);
-  transition-delay: calc(var(--i) * 18ms);
-}
-.roll-char::after {
-  content: attr(data-char);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  color: var(--gold);
-}
-a:hover .roll-char,
-button:hover .roll-char,
-a:focus-visible .roll-char {
-  transform: translateY(-100%);
-}
-
-/* ------------------------------------------------------------------
-   Spotlight cards: a soft light follows the pointer (--mx / --my set
-   by JS) and a shine sweeps across on hover.
-------------------------------------------------------------------- */
-.spotlight {
-  position: relative;
-  isolation: isolate;
-}
-.spotlight::before {
+/* Pointer-following glow; --mx/--my are set by <Interactions />. */
+.spotlight::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--gold-3) 26%, transparent), transparent 60%);
-  transition: opacity 0.5s var(--ease-out-expo);
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), var(--glow), transparent 65%);
+  transition: opacity 0.3s ease;
 }
-.spotlight:hover::before {
+.spotlight:hover::after {
   opacity: 1;
 }
-/* Needs a positioned element (relative or absolute). */
-.shine {
-  overflow: hidden;
-}
-.shine::after {
-  content: "";
-  position: absolute;
-  inset: -50% auto -50% -60%;
-  width: 40%;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: translateX(0) rotate(12deg);
-  opacity: 0;
-}
-.shine:hover::after {
-  opacity: 1;
-  transform: translateX(420%) rotate(12deg);
-  transition: transform 1s var(--ease-out-expo), opacity 0.2s;
 }
 
-/* Scroll progress hairline at the very top of the page. */
+/* Soft warm wash behind the hero. Pure gradient, no images. */
+.hero-wash {
+  background:
+    radial-gradient(50% 60% at 85% 20%, var(--glow), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, color-mix(in oklab, var(--ember) 7%, transparent), transparent 70%);
+}
+.dot-grid {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(70% 60% at 60% 40%, #000 30%, transparent 75%);
+}
+
+/* ------------------------------------------------------------------
+   Scroll reveal. Hidden only when JS runs (html.js), so content is
+   always visible without it. <Interactions /> adds .is-in.
+------------------------------------------------------------------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  transition-delay: var(--d, 0ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Above-the-fold entrance: pure CSS, starts with the first paint so it
+   never waits for JavaScript (keeps LCP fast). */
+.rise {
+  animation: rise 0.8s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Signature monogram: the strokes draw in, then the fill settles.
+------------------------------------------------------------------- */
+.sig-text {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  fill-opacity: 0;
+  animation: sig-draw 2.2s var(--ease-out-expo) 0.15s forwards, sig-fill 0.8s ease 1.3s forwards;
+}
+.sig-flourish {
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation: sig-draw 1.4s var(--ease-out-expo) 1s forwards;
+}
+.sig-spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: sig-spark 0.6s var(--ease-out-expo) 1.9s forwards;
+}
+.group:hover .sig-spark {
+  animation: sig-spin 1.2s var(--ease-out-expo);
+  opacity: 1;
+}
+@keyframes sig-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sig-fill {
+  to {
+    fill-opacity: 1;
+  }
+}
+@keyframes sig-spark {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes sig-spin {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Hero: typing caret + the delivery pipeline card
+------------------------------------------------------------------- */
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 2px;
+  vertical-align: -0.08em;
+  background: var(--gold);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Each step lights up in turn on a shared 10s loop (delay set inline). */
+.pipe-step {
+  animation: pipe-step 10s infinite;
+  animation-delay: var(--d);
+}
+.pipe-step .pipe-dot {
+  animation: pipe-dot 10s infinite;
+  animation-delay: var(--d);
+}
+@keyframes pipe-step {
+  0%,
+  22% {
+    background: var(--surface-2);
+    border-color: var(--line-strong);
+  }
+  25%,
+  100% {
+    background: transparent;
+    border-color: var(--line);
+  }
+}
+@keyframes pipe-dot {
+  0%,
+  22% {
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--glow);
+  }
+  25%,
+  100% {
+    background: var(--line-strong);
+    box-shadow: none;
+  }
+}
+.pipe-bar {
+  transform-origin: left;
+  animation: pipe-bar 10s linear infinite;
+}
+@keyframes pipe-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.status-dot {
+  position: relative;
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: inherit;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Filter grids: new cards pop in. */
+.pop-in {
+  animation: pop-in 0.45s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+/* Contact success tick. */
+.tick-draw {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: sig-draw 0.7s var(--ease-out-expo) 0.15s forwards;
+}
+
 .scroll-progress {
-  transform-origin: 0 50%;
+  transform-origin: left;
   transform: scaleX(var(--progress, 0));
 }
 
-/* Hero spotlight: warm gold ambient light under the cursor. */
-.hero-lens {
-  pointer-events: none;
-}
-
-/* ------------------------------------------------------------------
-   Initial states for JS-driven reveals. Only applied when JS is
-   running and the user has not asked for reduced motion, so content
-   is never hidden without a way to show it.
-------------------------------------------------------------------- */
-html.js:not(.reduce-motion) [data-reveal] {
-  opacity: 0;
-}
-html.js:not(.reduce-motion) .hero-intro {
-  opacity: 0;
-}
-
-html.is-loading {
-  overflow: hidden;
-}
-
-/* splitText clip wrappers: give tall display glyphs a little room. */
-.reveal-text span[style*="overflow"] {
-  padding-block: 0.06em;
-  margin-block: -0.06em;
-}
-
-/* Loader is skipped on repeat visits and with reduced motion. */
-html:not(.js) .site-loader,
-html.loader-skip .site-loader,
-html.reduce-motion .site-loader {
-  display: none;
-}
-
-/* ------------------------------------------------------------------
-   Reduced motion: final states, no pinning, no loops.
-------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
-}
-html.reduce-motion .pin-wrap {
-  height: auto !important;
-}
-html.reduce-motion .pin-stage {
-  position: relative !important;
-  height: auto !important;
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }

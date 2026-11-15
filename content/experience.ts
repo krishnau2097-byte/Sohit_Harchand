@@ -1,130 +1,38 @@
-/** Career entries — real experience at AOSC Technologies and related work. */
-
-export type ExperienceType = 'Full-time' | 'Freelance' | 'Internship' | 'Community'
+/** Career and education, as listed on the résumé. */
 
 export type Experience = {
   role: string
   company: string
-  type: ExperienceType
   start: string
   end: string
-  location: string
-  summary: string
+  /** Dynamics 365 apps delivered for clients. */
+  apps: string[]
   achievements: string[]
-  impact: { value: string; label: string }[]
   tech: string[]
 }
 
 export const experience: Experience[] = [
   {
-    role: 'Power Platform & React Developer',
-    company: 'AOSC Technologies',
-    type: 'Full-time',
-    start: '2025',
-    end: 'Present',
-    location: 'Punjab · Hybrid',
-    summary:
-      'Building migration platforms, AI-powered learning tools, and enterprise solutions. Leading frontend development for Switchblade — a platform that automates Tableau-to-Power BI report migration at scale.',
-    achievements: [
-      'Led React frontend development for Switchblade, a Tableau-to-Power BI migration platform enabling enterprises to migrate reports at scale.',
-      'Built Switchblade 2.0 with enhanced migration pipelines, batch processing, and real-time progress dashboards.',
-      'Developed AI-enabled learning management system integrating LLM-powered content generation and adaptive assessments.',
-      'Delivered Power BI dashboards and Power Automate workflows for internal analytics and process automation.',
-    ],
-    impact: [
-      { value: '2', label: 'Switchblade versions shipped' },
-      { value: '−70%', label: 'migration time saved' },
-      { value: '500+', label: 'reports migrated' },
-    ],
-    tech: ['React.js', 'Power BI', 'Python', 'Power Automate', 'Copilot Studio', 'SharePoint'],
-  },
-  {
-    role: 'Power Platform Intern',
-    company: 'AOSC Technologies',
-    type: 'Internship',
-    start: '2024',
-    end: '2025',
-    location: 'Punjab',
-    summary:
-      'Started as an intern building Power Apps canvas apps, SharePoint solutions, and Power Automate workflows. Gained hands-on experience in the Microsoft ecosystem while supporting enterprise client projects.',
-    achievements: [
-      'Built canvas apps for internal process digitisation, replacing paper-based forms and Excel trackers.',
-      'Created Power Automate flows for approval workflows, automated notifications, and data synchronisation.',
-      'Assisted in SharePoint intranet design and document management for enterprise clients.',
-      'Contributed to Power BI report development and data modelling for business intelligence dashboards.',
-    ],
-    impact: [
-      { value: '5+', label: 'apps delivered' },
-      { value: '−10h', label: 'admin saved weekly' },
-      { value: '3', label: 'clients supported' },
-    ],
-    tech: ['Power Apps', 'Power Automate', 'SharePoint Online', 'Power BI', 'Excel'],
-  },
-  {
-    role: 'Freelance Developer',
-    company: 'Self-employed',
-    type: 'Freelance',
+    role: 'Microsoft Dynamics 365 & Power Platform Developer',
+    company: 'AOSC',
     start: '2024',
     end: 'Present',
-    location: 'Remote',
-    summary: 'Small automation, web development, and Power Platform projects for local businesses alongside my main role at AOSC Technologies.',
+    apps: ['Sales', 'Customer Service', 'Field Service'],
     achievements: [
-      'Built responsive web applications using React.js and Next.js for small businesses.',
-      'Automated document processing and approval workflows with Power Automate and AI Builder.',
-      'Set up SharePoint document management and collaboration sites for small teams.',
+      'Delivered Dynamics 365 CE solutions (Sales, Customer Service, Field Service) for multiple clients: Business Process Flows, views, dashboards and role-based security.',
+      'Built end-to-end Power Platform solutions (Power Apps, Power Automate, Power Pages, Power BI, Dataverse), including Copilot Studio agents using Azure OpenAI and AI Builder.',
+      'Developed Dynamics 365 plugins (C#/.NET) and PCF controls (TypeScript) for business-rule enforcement, entity automation and custom form components.',
+      'Built back-end automation and integrations with Azure Functions, Logic Apps, Service Bus, the Dataverse Web API and REST APIs: webhook handling, async processing and third-party enterprise systems.',
+      'Deployed solutions through Azure DevOps CI/CD pipelines across Dev → UAT → Production; managed sprint work items on Azure DevOps Boards in Agile/Scrum teams.',
+      'Created SQL Server data models and stored procedures for compliance reporting, analytics and data migrations.',
     ],
-    impact: [
-      { value: '3', label: 'clients' },
-      { value: '−6h', label: 'admin per week' },
-      { value: '100%', label: 'repeat or referral' },
-    ],
-    tech: ['React.js', 'Next.js', 'Power Apps', 'AI Builder', 'SharePoint'],
-  },
-  {
-    role: 'Student Developer & Contributor',
-    company: 'LPU Tech Community',
-    type: 'Community',
-    start: '2023',
-    end: 'Present',
-    location: 'Phagwara · Online',
-    summary: 'Active participant in university tech events, hackathons, and community learning groups.',
-    achievements: [
-      'Participated in hackathons building AI/ML prototypes and full-stack applications.',
-      'Contributed to open-source projects and university coding communities.',
-      'Explored LLM integration, RAG pipelines, and AI-powered application development.',
-    ],
-    impact: [
-      { value: '3+', label: 'hackathons' },
-      { value: '5+', label: 'projects built' },
-      { value: 'MCA', label: 'AI/ML specialisation' },
-    ],
-    tech: ['Python', 'TensorFlow', 'React.js', 'LLMs', 'RAG'],
+    tech: ['Dynamics 365 CE', 'Power Apps', 'Power Automate', 'Dataverse', 'Copilot Studio', 'Azure OpenAI', 'C#/.NET', 'TypeScript', 'Azure Functions', 'Azure DevOps'],
   },
 ]
 
-export type Education = { title: string; school: string; detail: string; years: string; location: string; tags: string[] }
+export type Education = { title: string; school: string; location: string; years: string }
 
 export const education: Education[] = [
-  {
-    title: 'Master of Computer Applications (MCA)',
-    school: 'Lovely Professional University',
-    detail: 'Specialisation in Artificial Intelligence & Machine Learning',
-    years: '2023 – 2025',
-    location: 'Phagwara, Punjab',
-    tags: ['AI/ML', 'Deep Learning', 'NLP', 'Computer Vision', 'Data Science'],
-  },
-  {
-    title: 'Bachelor of Computer Applications (BCA)',
-    school: 'Affiliated University',
-    detail: 'Computer Science, Software Engineering & Web Technologies',
-    years: '2020 – 2023',
-    location: 'Punjab, India',
-    tags: ['Data Structures', 'Algorithms', 'Web Development', 'Databases', 'Python'],
-  },
-]
-
-export const achievements = [
-  { title: 'Switchblade 2.0 Launch', year: '2025', detail: 'Led frontend development for the second major release of the Tableau-to-Power BI migration platform at AOSC Technologies.' },
-  { title: 'AI Learning Platform', year: '2025', detail: 'Architected and shipped an LLM-powered adaptive learning management system from concept to production.' },
-  { title: 'Hackathon Finalist', year: '2024', detail: 'Built an AI-powered prototype at LPU hackathon, placing in the top teams with a real-time content recommendation engine.' },
+  { title: 'Master of Computer Applications (MCA)', school: 'Lovely Professional University', location: 'Jalandhar', years: '2024 – Present' },
+  { title: 'Bachelor of Computer Applications (BCA)', school: 'Guru Nanak Dev University', location: 'Amritsar', years: '2021 – 2024' },
 ]
