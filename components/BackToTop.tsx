@@ -1,26 +1,37 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { animate } from 'animejs'
+import { scrollToTarget } from './providers/SmoothScroll'
 import { ArrowUp } from './ui/Icons'
 
-const R = 18
+const R = 22
 const C = 2 * Math.PI * R
 
-/** Reading-progress hairline at the top, plus a back-to-top button whose ring fills as you scroll. */
+/** Back-to-top button with a ring that fills as you read the page, plus a top progress bar. */
 export function BackToTop() {
+  const btnRef = useRef<HTMLButtonElement>(null)
   const ringRef = useRef<SVGCircleElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
-  const [shown, setShown] = useState(false)
 
   useEffect(() => {
+    const btn = btnRef.current!
+    const ring = ringRef.current!
+    let shown = false
     let raf = 0
     const update = () => {
       raf = 0
       const max = document.documentElement.scrollHeight - window.innerHeight
-      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0
-      ringRef.current?.style.setProperty('stroke-dashoffset', String(C * (1 - p)))
+      const p = max > 0 ? window.scrollY / max : 0
+      ring.style.strokeDashoffset = String(C * (1 - p))
       barRef.current?.style.setProperty('--progress', String(p))
-      setShown(window.scrollY > 600)
+      const show = window.scrollY > 700
+      if (show !== shown) {
+        shown = show
+        btn.tabIndex = show ? 0 : -1
+        animate(btn, { opacity: show ? 1 : 0, scale: show ? 1 : 0.6, y: show ? 0 : 20, duration: 500, ease: 'out(4)' })
+        btn.style.pointerEvents = show ? 'auto' : 'none'
+      }
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
@@ -37,22 +48,23 @@ export function BackToTop() {
 
   return (
     <>
+      {/* Reading-progress hairline across the top of the page */}
       <div ref={barRef} className="scroll-progress pointer-events-none fixed inset-x-0 top-0 z-[60] h-[2px] bg-gradient-to-r from-gold via-ember to-gold-3" aria-hidden="true" />
-      <button
-        type="button"
-        aria-label="Back to top"
-        tabIndex={shown ? 0 : -1}
-        onClick={() => window.scrollTo({ top: 0 })}
-        className={`fixed right-4 bottom-4 z-40 grid h-11 w-11 place-items-center rounded-full bg-surface text-gold shadow-[var(--shadow)] transition-all duration-300 md:right-6 md:bottom-6 ${
-          shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
-        }`}
-      >
-        <svg className="absolute inset-0 -rotate-90" viewBox="0 0 44 44" aria-hidden="true">
-          <circle cx="22" cy="22" r={R} fill="none" stroke="var(--line)" strokeWidth="1.5" />
-          <circle ref={ringRef} cx="22" cy="22" r={R} fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeDasharray={C} strokeDashoffset={C} strokeLinecap="round" />
-        </svg>
-        <ArrowUp size={16} />
-      </button>
+    <button
+      ref={btnRef}
+      type="button"
+      tabIndex={-1}
+      aria-label="Back to top"
+      onClick={() => scrollToTarget(0)}
+      className="group fixed right-5 bottom-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-surface/80 text-gold opacity-0 shadow-[var(--shadow)] backdrop-blur-md md:right-8 md:bottom-8"
+      style={{ pointerEvents: 'none' }}
+    >
+      <svg className="absolute inset-0 -rotate-90" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r={R} fill="none" stroke="var(--line)" strokeWidth="1.5" />
+        <circle ref={ringRef} cx="28" cy="28" r={R} fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeDasharray={C} strokeDashoffset={C} strokeLinecap="round" />
+      </svg>
+      <ArrowUp size={18} className="transition-transform duration-500 group-hover:-translate-y-1" />
+    </button>
     </>
   )
 }

@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProject, projects } from '@/content/projects'
-import { ArrowLeft, ArrowRight, Check } from '@/components/ui/Icons'
+import { ProjectHeroShot } from '@/components/projects/ProjectHeroShot'
+import { RevealText } from '@/components/ui/RevealText'
+import { FadeIn } from '@/components/ui/FadeIn'
+import { ArrowLeft, ArrowUpRight, Check } from '@/components/ui/Icons'
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -27,69 +30,115 @@ export default async function ProjectPage({ params }: PageProps<'/projects/[slug
   const i = projects.indexOf(p)
   const next = projects[(i + 1) % projects.length]
 
+  const sections = [
+    { k: 'The problem', body: <p>{p.caseStudy.problem}</p> },
+    { k: 'My role', body: <p>{p.caseStudy.role}</p> },
+    {
+      k: 'Stack',
+      body: (
+        <ul className="flex flex-wrap gap-2">
+          {p.tech.map((t) => (
+            <li key={t} className="chip">
+              {t}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+    {
+      k: 'What we built',
+      body: (
+        <ul className="space-y-3">
+          {p.caseStudy.features.map((f) => (
+            <li key={f} className="flex gap-3">
+              <Check size={18} className="mt-1 shrink-0 text-gold" /> {f}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+    { k: 'Outcome', body: <p className="font-serif text-2xl leading-snug text-ink italic md:text-3xl">{p.caseStudy.outcome}</p> },
+  ]
+
   return (
     <article>
-      <header className="relative overflow-clip pt-28 pb-10 md:pt-36">
-        <div className="hero-wash pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="container-page relative max-w-4xl">
+      <header className="relative overflow-clip pt-32 pb-12 md:pt-40">
+        <div className="blinds pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
+        <div className="relative mx-auto max-w-[1440px] px-5 md:px-10">
           <Link href="/projects" className="group inline-flex items-center gap-2 text-sm text-ink-2 hover:text-gold">
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" /> All projects
           </Link>
-          <p className="rise eyebrow mt-8">
-            {p.categories.join(' · ')}
-          </p>
-          <h1 className="mt-3text-[clamp(2rem,1.4rem+2.6vw,3rem)] leading-[1.1] font-semibold text-ink">
+          <p className="eyebrow mt-10">{p.categories.join(' · ')}</p>
+          <RevealText as="h1" trigger="loader" className="font-wide mt-5 max-w-[18ch] text-[clamp(2.6rem,6.5vw,6rem)] text-ink">
             {p.title}
-          </h1>
-          <p style={{ '--d': '120ms' } as React.CSSProperties} className="rise mt-2 text-lg text-gold">
-            {p.subtitle}
-          </p>
-          <p style={{ '--d': '180ms' } as React.CSSProperties} className="rise mt-5 max-w-2xl leading-relaxed text-ink-2">
-            {p.summary}
-          </p>
+          </RevealText>
+          <FadeIn items=".meta" delay={300} className="mt-10 grid grid-cols-2 gap-6 border-t border-line pt-6 md:grid-cols-4">
+            {[
+              ['Built for', p.client],
+              ['Sector', p.sector],
+              ['Stack', `${p.tech.length} technologies`],
+              ['Platform', p.categories[0]],
+            ].map(([k, v]) => (
+              <div key={k} className="meta">
+                <p className="font-mono text-[11px] tracking-wider text-ink-3 uppercase">{k}</p>
+                <p className="mt-1 text-ink">{v}</p>
+              </div>
+            ))}
+          </FadeIn>
         </div>
       </header>
 
-      <div className="container-page max-w-4xl space-y-6 pb-20">
-        <section data-reveal="" aria-labelledby="stack-title" className="card p-5 md:p-7">
-          <h2 id="stack-title" className="eyebrow">
-            Stack
-          </h2>
-          <ul className="mt-4 flex flex-wrap gap-1.5">
-            {p.stack.map((t) => (
-              <li key={t} className="chip">
-                {t}
-              </li>
-            ))}
-          </ul>
-        </section>
+      <ProjectHeroShot project={p} />
 
-        <section data-reveal="" aria-labelledby="built-title" className="card p-5 md:p-7">
-          <h2 id="built-title" className="eyebrow">
-            What I built
-          </h2>
-          <ul className="mt-5 space-y-5">
-            {p.highlights.map((h, n) => (
-              <li key={n} data-reveal="" style={{ '--d': `${n * 70}ms` } as React.CSSProperties} className="flex gap-3">
-                <Check size={18} className="mt-0.5 shrink-0 text-gold" />
-                <div className="leading-relaxed text-ink-2">
-                  {h.label ? <p className="mb-1 font-medium text-ink">{h.label}</p> : null}
-                  <p>{h.text}</p>
+      <section className="py-20 md:py-28" aria-label="Case study">
+        <div className="mx-auto grid max-w-[1440px] gap-16 px-5 md:px-10 lg:grid-cols-12">
+          <FadeIn className="lg:col-span-4" y={20}>
+            <p className="font-serif text-2xl leading-snug text-ink italic">{p.summary}</p>
+            <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-line py-6 lg:grid-cols-1">
+              {p.metrics.map((m) => (
+                <div key={m.label} className="flex flex-col-reverse">
+                  <dt className="mt-1 text-sm text-ink-3">{m.label}</dt>
+                  <dd className="font-wide text-[clamp(1.6rem,3vw,2.6rem)] text-gold">{m.value}</dd>
                 </div>
-              </li>
+              ))}
+            </dl>
+            {p.links?.demo || p.links?.code ? (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {p.links.demo ? (
+                  <a href={p.links.demo} className="btn btn-primary" target="_blank" rel="noreferrer">
+                    Live demo <ArrowUpRight size={16} />
+                  </a>
+                ) : null}
+                {p.links.code ? (
+                  <a href={p.links.code} className="btn btn-ghost" target="_blank" rel="noreferrer">
+                    Code
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+          </FadeIn>
+          <div className="space-y-4 lg:col-span-7 lg:col-start-6">
+            {sections.map((s, n) => (
+              <FadeIn key={s.k} className="card grid gap-4 p-6 md:grid-cols-[10rem_1fr] md:p-8" y={40}>
+                <h2 className="eyebrow flex gap-3">
+                  <span className="text-ink-3">0{n + 1}</span> {s.k}
+                </h2>
+                <div className="leading-relaxed text-ink-2">{s.body}</div>
+              </FadeIn>
             ))}
-          </ul>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <Link href={`/projects/${next.slug}`} data-reveal="" className="card card-hover spotlight group flex items-center justify-between gap-4 p-5 md:p-7">
-          <span>
-            <span className="eyebrow">Next project</span>
-            <span className="mt-2 block text-lg font-semibold text-ink group-hover:text-gold">{next.title}</span>
-            <span className="block text-sm text-ink-3">{next.subtitle}</span>
-          </span>
-          <ArrowRight size={22} className="shrink-0 text-gold transition-transform group-hover:translate-x-1" />
-        </Link>
-      </div>
+      <Link href={`/projects/${next.slug}`} className="group relative block overflow-hidden border-t border-line bg-bg-2 py-20 md:py-28">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+          <p className="eyebrow">Next project</p>
+          <p className="font-wide mt-5 flex items-center gap-6 text-[clamp(2.2rem,6vw,5.5rem)] text-ink transition-colors duration-500 group-hover:text-gold">
+            {next.title}
+            <ArrowUpRight size={56} className="shrink-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2" />
+          </p>
+        </div>
+      </Link>
     </article>
   )
 }

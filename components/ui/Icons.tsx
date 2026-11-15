@@ -105,16 +105,16 @@ export const Sparkle = (p: IconProps) => (
     <path d="M12 3c.6 4.6 3.4 7.4 8 8-4.6.6-7.4 3.4-8 8-.6-4.6-3.4-7.4-8-8 4.6-.6 7.4-3.4 8-8Z" />
   </Base>
 )
-export const Menu = (p: IconProps) => (
+export const Quote = (p: IconProps) => (
   <Base {...p}>
-    <path d="M4 7h16M4 12h16M4 17h10" />
+    <path d="M10 7H6a2 2 0 0 0-2 2v3h5v5H4M20 7h-4a2 2 0 0 0-2 2v3h5v5h-5" />
   </Base>
 )
 
-/* Skill-group icons, keyed by the group ids in content/skills.ts. */
-export const SkillIcon = ({ name, ...p }: IconProps & { name: string }) => {
+/* Service icons: drawn with strokes so createDrawable can trace them on hover. */
+export const ServiceIcon = ({ name, ...p }: IconProps & { name: string }) => {
   switch (name) {
-    case 'platform':
+    case 'apps':
       return (
         <Base strokeWidth={1.3} {...p}>
           <rect x="3" y="3" width="7.5" height="7.5" rx="2" />
@@ -123,37 +123,22 @@ export const SkillIcon = ({ name, ...p }: IconProps & { name: string }) => {
           <path d="M17.25 13.5v7.5M13.5 17.25H21" />
         </Base>
       )
-    case 'azure':
+    case 'intranet':
       return (
         <Base strokeWidth={1.3} {...p}>
-          <path d="M7 18.5a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.5 4.5 0 0 1-.5 10Z" />
-          <path d="M10 14.5h4M12 12.5v4" />
+          <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
+          <path d="M2.5 8.5h19M7 13h6M7 16.5h10" />
+          <circle cx="17" cy="13" r="1.2" />
         </Base>
       )
-    case 'data':
-      return (
-        <Base strokeWidth={1.3} {...p}>
-          <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" />
-          <path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8" />
-        </Base>
-      )
-    case 'devops':
-      return (
-        <Base strokeWidth={1.3} {...p}>
-          <circle cx="6" cy="5.5" r="2.3" />
-          <circle cx="6" cy="18.5" r="2.3" />
-          <circle cx="18" cy="8" r="2.3" />
-          <path d="M6 7.8v8.4M18 10.3c0 4-6 3-11 6.2" />
-        </Base>
-      )
-    case 'ai':
+    case 'agent':
       return (
         <Base strokeWidth={1.3} {...p}>
           <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5Z" />
           <path d="M12 6.5c.3 1.9 1.4 3 3.3 3.3-1.9.3-3 1.4-3.3 3.3-.3-1.9-1.4-3-3.3-3.3 1.9-.3 3-1.4 3.3-3.3Z" />
         </Base>
       )
-    case 'd365':
+    case 'crm':
       return (
         <Base strokeWidth={1.3} {...p}>
           <circle cx="9" cy="8" r="3.5" />

@@ -6,7 +6,7 @@
  * production answers 503 so nothing is silently dropped.
  */
 
-type Payload = { name?: string; email?: string; message?: string; company?: string }
+type Payload = { firstName?: string; lastName?: string; email?: string; subject?: string; message?: string; company?: string }
 
 const clip = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
 
@@ -22,12 +22,14 @@ export async function POST(request: Request) {
   if (clip(body.company, 200)) return Response.json({ ok: true })
 
   const data = {
-    name: clip(body.name, 120),
+    firstName: clip(body.firstName, 80),
+    lastName: clip(body.lastName, 80),
     email: clip(body.email, 200),
+    subject: clip(body.subject, 200),
     message: clip(body.message, 5000),
   }
 
-  if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email) || data.message.length < 20) {
+  if (!data.firstName || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email) || !data.subject || data.message.length < 20) {
     return Response.json({ ok: false, error: 'Please check the highlighted fields.' }, { status: 422 })
   }
 
@@ -54,8 +56,8 @@ export async function POST(request: Request) {
           from: process.env.CONTACT_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
           to: [to],
           reply_to: data.email,
-          subject: `Portfolio message from ${data.name}`,
-          text: `From: ${data.name} <${data.email}>\n\n${data.message}`,
+          subject: `Portfolio: ${data.subject}`,
+          text: `From: ${data.firstName} ${data.lastName} <${data.email}>\n\n${data.message}`,
         }),
       })
       if (!res.ok) throw new Error(`Resend responded ${res.status}`)
